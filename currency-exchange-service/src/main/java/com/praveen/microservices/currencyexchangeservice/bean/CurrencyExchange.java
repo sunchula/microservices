@@ -2,12 +2,24 @@ package com.praveen.microservices.currencyexchangeservice.bean;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class CurrencyExchange {
 	
+	@Id
 	private Long id;
+	
+	@Column(name = "currency_from")
 	private String from;
+	
+	@Column(name = "currency_to")
 	private String to;
-	private BigDecimal converstionMultiple;
+	
+	private BigDecimal conversionMultiple;
+	
 	private String environment;
 	
 	public CurrencyExchange(Long id, String from, String to, BigDecimal converstionMultiple) {
@@ -15,7 +27,7 @@ public class CurrencyExchange {
 		this.id = id;
 		this.from = from;
 		this.to = to;
-		this.converstionMultiple = converstionMultiple;
+		this.conversionMultiple = converstionMultiple;
 	}
 	
 	public CurrencyExchange() {
@@ -42,10 +54,10 @@ public class CurrencyExchange {
 		this.to = to;
 	}
 	public BigDecimal getConverstionMultiple() {
-		return converstionMultiple;
+		return conversionMultiple;
 	}
 	public void setConverstionMultiple(BigDecimal converstionMultiple) {
-		this.converstionMultiple = converstionMultiple;
+		this.conversionMultiple = converstionMultiple;
 	}
 	public String getEnvironment() {
 		return environment;
