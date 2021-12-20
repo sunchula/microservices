@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.praveen.microservices.currencyexchangeservice.bean.CurrencyExchange;
+import com.praveen.microservices.currencyexchangeservice.repo.CurrencyExchangeRepo;
 
 @RestController
 public class CurrencyExchangeController {
+	
+	@Autowired
+	private CurrencyExchangeRepo repository;
 	
 	@Autowired
 	private Environment environment;
@@ -21,9 +25,17 @@ public class CurrencyExchangeController {
 			@PathVariable String from,
 			@PathVariable String to) {
 		
-		CurrencyExchange currencyExchange = new CurrencyExchange(1000L,from,to,BigDecimal.valueOf(50));
+		CurrencyExchange currencyExchange = repository.findByFromAndTo(from, to);
+		
+		if(currencyExchange == null) {
+			throw new RuntimeException("Unable to Find Data for " + from + " to " + to);
+		}
 		String port = environment.getProperty("local.server.port");
 		currencyExchange.setEnvironment(port);
+		
+		
+		
+		
 		return currencyExchange;
 		
 	}
