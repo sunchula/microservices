@@ -18,8 +18,16 @@ public class CurrencyExchange {
 	@Column(name = "currency_to")
 	private String to;
 	
+	@Column(name = "conversion_multiple")
 	private BigDecimal conversionMultiple;
 	
+	public BigDecimal getConversionMultiple() {
+		return conversionMultiple;
+	}
+
+	public void setConversionMultiple(BigDecimal conversionMultiple) {
+		this.conversionMultiple = conversionMultiple;
+	}
 	private String environment;
 	
 	public CurrencyExchange(Long id, String from, String to, BigDecimal converstionMultiple) {
